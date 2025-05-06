@@ -6,7 +6,7 @@ export const register = async (req, res) => {
   const {name, email, password} = req.body;
 
   try {
-    const existingUser = await db.user.findUnique({
+    const existingUser = await db.User.findUnique({
       where: {
         email
       }
@@ -22,7 +22,7 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await db.user.create({
+    const newUser = await db.User.create({
       data: {
         name,
         email,
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
   const {email, password} = req.body;
 
   try {
-    const user = await db.user.findUnique({
+    const user = await db.User.findUnique({
       where:{
         email
       }
