@@ -53,3 +53,15 @@ export const authMiddleware = async (req, res, next) => {
     })
   }
 }
+
+// no need to vaidate in db, as we have already checked in auth middleware
+export const checkAdmin = (req, res, next) => {
+  if(req.user.role !== "ADMIN") {
+    // authenticated, but don't have this permission
+    return res.status(403).json({
+      success: false,
+      error: "Access denied"
+    })
+  }
+  next();
+}
