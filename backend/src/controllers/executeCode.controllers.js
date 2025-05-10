@@ -142,7 +142,7 @@ export const executeCode = async (req, res) => {
       submissions: submissionWithTestCase
     })
   } catch (error) {
-    console.log(error);
+    console.error("Error in executing code:", error);
     return res.status(500).json({
       success: false,
       error: "Internal issue in executing code"
