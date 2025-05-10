@@ -1,4 +1,4 @@
-import db from "../utils/db";
+import {db} from "../libs/db.js";
 
 export const getAllSubmissions = async (req, res) => {
   const userId = req.user.id;
