@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import problemRoutes from "./routes/problem.router.js";
+import executionRoutes from "./routes/executeCode.routes.js";
 
 dotenv.config();
 
@@ -22,6 +23,9 @@ app.use("/api/v1/auth", authRoutes);
 
 // problem routes
 app.use("/api/v1/problems", problemRoutes);
+
+// exicute code routes
+app.use("/api/v1/execute", executionRoutes);
 
 // 404 - Not Found handler
 app.use((req, res) => {
