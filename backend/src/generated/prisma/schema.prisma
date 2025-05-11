@@ -35,9 +35,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // realtionship
   problems      Problem[]
   submissions   Submission[]
   problemSolved ProblemSolved[]
+  sheets        Sheet[]
 }
 
 model Problem {
@@ -60,9 +62,10 @@ model Problem {
   updatedAt DateTime @updatedAt
 
   // relationship
-  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  submissions Submission[]
-  solvedBy    ProblemSolved[]
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  submissions        Submission[]
+  solvedBy           ProblemSolved[]
+  problemInPlaylists ProblemInSheet[]
 }
 
 model Submission {
@@ -115,9 +118,38 @@ model ProblemSolved {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //relationship
+  // relationship
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([userId, problemId])
+}
+
+model Sheet {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // relationship
+  problems ProblemInSheet[]
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([name, userId])
+}
+
+model ProblemInSheet {
+  id        String   @id @default(uuid())
+  sheetId   String
+  problemId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relationship
+  sheet   Sheet   @relation(fields: [sheetId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@unique([sheetId, problemId])
 }

@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import problemRoutes from "./routes/problem.routers.js";
 import executionRoutes from "./routes/executeCode.routers.js";
 import submissionRoutes from "./routes/submission.routers.js";
+import sheetsRoutes from "./routes/sheets.routes.js";
 
 dotenv.config();
 
@@ -30,6 +31,9 @@ app.use("/api/v1/execute", executionRoutes);
 
 // submission routes
 app.use("/api/v1/submissions", submissionRoutes);
+
+// sheets routes
+app.use("/api/v1/sheets", sheetsRoutes);
 
 // 404 - Not Found handler
 app.use((req, res) => {
