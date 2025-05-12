@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
+import cors from "cors"
+
 import problemRoutes from "./routes/problem.routers.js";
 import executionRoutes from "./routes/executeCode.routers.js";
 import submissionRoutes from "./routes/submission.routers.js";
@@ -10,6 +12,14 @@ import sheetsRoutes from "./routes/sheets.routes.js";
 dotenv.config();
 
 const app = express();
+
+// cors
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+  })
+)
 
 // middleware
 app.use(express.json());

@@ -2,7 +2,7 @@ export const getJudge0LanguageId = (language) => {
   const languageMap = {
     "JAVASCRIPT": 63,
     "JAVA": 62,
-    "C++": 54
+    "PYTHON": 71
   }
 
   return languageMap[language.toUpperCase()];
@@ -12,7 +12,7 @@ export const getLanguageName = (languageId) => {
   const languageMap = {
     63: "JAVASCRIPT",
     62: "JAVA",
-    54: "C++"
+    71: "PYTHON"
   }
   return languageMap[languageId];
 }
@@ -32,7 +32,7 @@ export const pollBatchResults = async (tokens) => {
     const {data} = await axios.get(`${process.env.JUDGE0_BASE_URL}/submissions/batch`, {
       params: {
         tokens: tokens.join(","),
-        base64_encoded: false
+        base64_encoded: true
       }
     });
     
